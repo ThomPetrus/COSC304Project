@@ -1,0 +1,182 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Lab 5 Question 2 SQL DDL 				     
+ * 										
+ * Authors: 								
+ * Thomas Van De Crommenacker (33970138)
+ * Michael Crouse 			 (19271834)
+ * Ian Heales				 (40183402)
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ */
+-- Opted to make all customer info required.
+CREATE TABLE Customer (
+	custId	   INTEGER 	   AUTO_INCREMENT, 
+	firstName	 VARCHAR(25) NOT NULL,
+	lastName 	 VARCHAR(30) NOT NULL, 
+	email 	   VARCHAR(50) NOT NULL,	
+	phoneNo 	 VARCHAR(20) NOT NULL, 
+	address 	 VARCHAR(25) NOT NULL, 
+	city 	     VARCHAR(25) NOT NULL, 
+	province   VARCHAR(25) NOT NULL, 
+	postalCode VARCHAR(10) NOT NULL,
+	country 	 VARCHAR(20) NOT NULL, 
+	userId 	   VARCHAR(50) NOT NULL, 
+	pw 		     VARCHAR(50) NOT NULL, 
+	UNIQUE (userId),
+	PRIMARY KEY(custId) 
+);
+ 
+ -- mySQL doesn't acutally support User defind datatypes so added a CHECK
+CREATE TABLE PaymentMethod (
+	pmtId 	  INTEGER 		AUTO_INCREMENT, 		-- AUTO_INCREMENT id		
+	pmtType 	VARCHAR(20), 				
+	pmtNo 	  INTEGER 		NOT NULL, 
+	pmtExpiry DATETIME 		NOT NULL,
+	custId 	  INTEGER		  NOT NULL,
+	PRIMARY KEY (pmtId),
+	FOREIGN KEY (custId) REFERENCES Customer(custId)
+	ON UPDATE CASCADE ON DELETE CASCADE,	-- CASCADE for both when custId is changed	
+	CHECK (pmtType IN ('Visa', 'Master Card', 'PayPal', 'BTC', 'AltCoin'))
+);
+
+-- All info except description required.
+CREATE TABLE Shipment(
+	sid 		  	INTEGER		AUTO_INCREMENT,
+	shipDate		DATETIME 		NOT NULL,  
+	description	VARCHAR(255),
+	PRIMARY KEY (sid)
+);
+
+	
+-- Again all info set to required for an Order
+CREATE TABLE OrderSummary(
+	orderId 		INTEGER 		AUTO_INCREMENT, 
+	orderDate 	DATETIME 		NOT NULL, 
+	total 		  DOUBLE(20, 2)  NOT NULL,
+	address 		VARCHAR(50) 	NOT NULL, 
+	city 		    VARCHAR(25) 	NOT NULL, 
+	state 		  VARCHAR(50) 	NOT NULL, 
+	country 		VARCHAR(25) 	NOT NULL, 
+	postalCode 	VARCHAR(10) 	NOT NULL, 
+	sid 			  INTEGER		NOT NULL, 
+	custId 		  INTEGER 		NOT NULL,
+	UNIQUE (sid),
+	PRIMARY KEY (orderId), 
+	FOREIGN KEY (sid) REFERENCES Shipment(sid)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (custId) REFERENCES Customer(custId)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Category (
+	catgId INTEGER		    AUTO_INCREMENT, 
+	catgName VARCHAR(50)    NOT NULL,
+	PRIMARY KEY(catgId)
+);
+
+
+-- All product Info is required - except maybe a description.
+CREATE TABLE Product(
+	pid 			INTEGER  AUTO_INCREMENT, 
+	pname 		VARCHAR(50) 	NOT NULL, 
+	price 		DOUBLE(20, 2) 	NOT NULL, 
+	imgURL 		VARCHAR(50)	NOT NULL, 
+	IMG 			BLOB 		NOT NULL, 
+	description	VARCHAR(255),
+	catgId		INTEGER		NOT NULL,
+	PRIMARY KEY (pid),
+	FOREIGN KEY (catgId) REFERENCES Category(catgId)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Again all values are required in the shoppingcart
+CREATE TABLE ShoppingCart(
+	custId 	  INTEGER, 
+	pid 		  INTEGER,
+	quantity 	INTEGER 	NOT NULL,
+	PRIMARY KEY (custId, pid),
+	FOREIGN KEY (custId) REFERENCES Customer(custId)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (pid) REFERENCES Product(pid)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE WareHouse(
+	wid 		INTEGER 		AUTO_INCREMENT, 
+	wname 	VARCHAR(50) 	NOT NULL, 
+	PRIMARY KEY(wid)
+);
+
+CREATE TABLE StoredIn(
+	wid 	  	INTEGER, 
+	pid 	  	INTEGER, 
+	inventory INTEGER 	NOT NULL, 
+	PRIMARY KEY(wid, pid),
+	FOREIGN KEY (wid) REFERENCES WareHouse(wid)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (pid) REFERENCES Product(pid)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE InOrder (
+	pid 	 	   INTEGER, 
+	orderId	   INTEGER, 
+	quantity   INTEGER 	NOT NULL, 
+	PRIMARY KEY (pid, orderId),
+	FOREIGN KEY (pid) REFERENCES Product(pid)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (orderId) REFERENCES OrderSummary(orderId)
+	ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Added a check to verify valid ratings.
+-- comment is optional.
+CREATE TABLE Review(
+	rid 		  	INTEGER, 
+	rating 		  INTEGER 		NOT NULL, 
+	comment 		VARCHAR(255), 
+	reviewDate 	DATETIME 		NOT NULL, 
+	custId 		  INTEGER 		NOT NULL, 
+	pid 			  INTEGER 		NOT NULL,
+	PRIMARY KEY (rid),
+	FOREIGN KEY (custId) REFERENCES Customer(CustId)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (pid) REFERENCES Product(pid)
+	ON DELETE CASCADE ON UPDATE CASCADE,
+	CHECK (rating IN (1, 2, 3, 4, 5))	   
+);
+
+
+
+-- delete 
+/*
+DROP TABLE PaymentMethod;
+DROP TABLE ShoppingCart;
+DROP TABLE Review;
+DROP TABLE InOrder;
+DROP TABLE StoredIn;
+DROP TABLE WareHouse;
+DROP TABLE Product;
+DROP TABLE Category;
+DROP TABLE OrderSummary;
+DROP TABLE Customer;
+DROP TABLE Shipment;
+*/	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+
+
+
+
+
+
+
