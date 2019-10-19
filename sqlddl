@@ -9,18 +9,18 @@
  */
 -- Opted to make all customer info required.
 CREATE TABLE Customer (
-	custId	   INTEGER 	   AUTO_INCREMENT, 
+	custId	     	 INTEGER 	   AUTO_INCREMENT, 
 	firstName	 VARCHAR(25) NOT NULL,
 	lastName 	 VARCHAR(30) NOT NULL, 
-	email 	   VARCHAR(50) NOT NULL,	
+	email 	 	 VARCHAR(50) NOT NULL,	
 	phoneNo 	 VARCHAR(20) NOT NULL, 
 	address 	 VARCHAR(25) NOT NULL, 
-	city 	     VARCHAR(25) NOT NULL, 
-	province   VARCHAR(25) NOT NULL, 
-	postalCode VARCHAR(10) NOT NULL,
+	city 	     	 VARCHAR(25) NOT NULL, 
+	province   	 VARCHAR(25) NOT NULL, 
+	postalCode 	 VARCHAR(10) NOT NULL,
 	country 	 VARCHAR(20) NOT NULL, 
-	userId 	   VARCHAR(50) NOT NULL, 
-	pw 		     VARCHAR(50) NOT NULL, 
+	userId 	  	 VARCHAR(50) NOT NULL, 
+	pw 		 VARCHAR(50) NOT NULL, 
 	UNIQUE (userId),
 	PRIMARY KEY(custId) 
 );
@@ -28,7 +28,7 @@ CREATE TABLE Customer (
  -- mySQL doesn't acutally support User defind datatypes so added a CHECK
 CREATE TABLE PaymentMethod (
 	pmtId 	  INTEGER 		AUTO_INCREMENT, 		-- AUTO_INCREMENT id		
-	pmtType 	VARCHAR(20), 				
+	pmtType   VARCHAR(20), 				
 	pmtNo 	  INTEGER 		NOT NULL, 
 	pmtExpiry DATETIME 		NOT NULL,
 	custId 	  INTEGER		  NOT NULL,
@@ -40,8 +40,8 @@ CREATE TABLE PaymentMethod (
 
 -- All info except description required.
 CREATE TABLE Shipment(
-	sid 		  	INTEGER		AUTO_INCREMENT,
-	shipDate		DATETIME 		NOT NULL,  
+	sid 		INTEGER		AUTO_INCREMENT,
+	shipDate	DATETIME 		NOT NULL,  
 	description	VARCHAR(255),
 	PRIMARY KEY (sid)
 );
@@ -50,15 +50,15 @@ CREATE TABLE Shipment(
 -- Again all info set to required for an Order
 CREATE TABLE OrderSummary(
 	orderId 		INTEGER 		AUTO_INCREMENT, 
-	orderDate 	DATETIME 		NOT NULL, 
-	total 		  DOUBLE(20, 2)  NOT NULL,
+	orderDate 		DATETIME 		NOT NULL, 
+	total 		  	DOUBLE(20, 2)  NOT NULL,
 	address 		VARCHAR(50) 	NOT NULL, 
-	city 		    VARCHAR(25) 	NOT NULL, 
-	state 		  VARCHAR(50) 	NOT NULL, 
+	city 		   	VARCHAR(25) 	NOT NULL, 
+	state 		  	VARCHAR(50) 	NOT NULL, 
 	country 		VARCHAR(25) 	NOT NULL, 
-	postalCode 	VARCHAR(10) 	NOT NULL, 
-	sid 			  INTEGER		NOT NULL, 
-	custId 		  INTEGER 		NOT NULL,
+	postalCode 		VARCHAR(10) 	NOT NULL, 
+	sid 			INTEGER		NOT NULL, 
+	custId 		 	INTEGER 		NOT NULL,
 	UNIQUE (sid),
 	PRIMARY KEY (orderId), 
 	FOREIGN KEY (sid) REFERENCES Shipment(sid)
@@ -68,7 +68,7 @@ CREATE TABLE OrderSummary(
 );
 
 CREATE TABLE Category (
-	catgId INTEGER		    AUTO_INCREMENT, 
+	catgId INTEGER		AUTO_INCREMENT, 
 	catgName VARCHAR(50)    NOT NULL,
 	PRIMARY KEY(catgId)
 );
@@ -76,11 +76,11 @@ CREATE TABLE Category (
 
 -- All product Info is required - except maybe a description.
 CREATE TABLE Product(
-	pid 			INTEGER  AUTO_INCREMENT, 
+	pid 		INTEGER  AUTO_INCREMENT, 
 	pname 		VARCHAR(50) 	NOT NULL, 
 	price 		DOUBLE(20, 2) 	NOT NULL, 
 	imgURL 		VARCHAR(50)	NOT NULL, 
-	IMG 			BLOB 		NOT NULL, 
+	IMG 		BLOB 		NOT NULL, 
 	description	VARCHAR(255),
 	catgId		INTEGER		NOT NULL,
 	PRIMARY KEY (pid),
@@ -90,8 +90,8 @@ CREATE TABLE Product(
 
 -- Again all values are required in the shoppingcart
 CREATE TABLE ShoppingCart(
-	custId 	  INTEGER, 
-	pid 		  INTEGER,
+	custId 	  	INTEGER, 
+	pid 		INTEGER,
 	quantity 	INTEGER 	NOT NULL,
 	PRIMARY KEY (custId, pid),
 	FOREIGN KEY (custId) REFERENCES Customer(custId)
@@ -101,7 +101,7 @@ CREATE TABLE ShoppingCart(
 );
 
 CREATE TABLE WareHouse(
-	wid 		INTEGER 		AUTO_INCREMENT, 
+	wid 	INTEGER 		AUTO_INCREMENT, 
 	wname 	VARCHAR(50) 	NOT NULL, 
 	PRIMARY KEY(wid)
 );
@@ -109,7 +109,7 @@ CREATE TABLE WareHouse(
 CREATE TABLE StoredIn(
 	wid 	  	INTEGER, 
 	pid 	  	INTEGER, 
-	inventory INTEGER 	NOT NULL, 
+	inventory 	INTEGER 	NOT NULL, 
 	PRIMARY KEY(wid, pid),
 	FOREIGN KEY (wid) REFERENCES WareHouse(wid)
 	ON DELETE CASCADE ON UPDATE CASCADE,
@@ -118,7 +118,7 @@ CREATE TABLE StoredIn(
 );
 
 CREATE TABLE InOrder (
-	pid 	 	   INTEGER, 
+	pid 	   INTEGER, 
 	orderId	   INTEGER, 
 	quantity   INTEGER 	NOT NULL, 
 	PRIMARY KEY (pid, orderId),
@@ -131,12 +131,12 @@ CREATE TABLE InOrder (
 -- Added a check to verify valid ratings.
 -- comment is optional.
 CREATE TABLE Review(
-	rid 		  	INTEGER, 
+	rid 		  INTEGER, 
 	rating 		  INTEGER 		NOT NULL, 
-	comment 		VARCHAR(255), 
-	reviewDate 	DATETIME 		NOT NULL, 
+	comment 	  VARCHAR(255), 
+	reviewDate 	  DATETIME 		NOT NULL, 
 	custId 		  INTEGER 		NOT NULL, 
-	pid 			  INTEGER 		NOT NULL,
+	pid 		  INTEGER 		NOT NULL,
 	PRIMARY KEY (rid),
 	FOREIGN KEY (custId) REFERENCES Customer(CustId)
 	ON DELETE CASCADE ON UPDATE CASCADE,
