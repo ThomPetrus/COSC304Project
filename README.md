@@ -1,2 +1,2 @@
-# COSC304Lab5
-SQL DDL Lab 5 COSC 304
+# COSC304Project
+Lab 5 - SQL DDL & other shit.
