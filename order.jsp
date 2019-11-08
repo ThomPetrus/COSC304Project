@@ -40,7 +40,7 @@
 			isValid = false;
 		}
 
-		if (productList.isEmpty()) {
+		if (productList != null && productList.isEmpty()) {
 			out.print("<h1>Your Cart is Empty!</h1>");
 		} else if (!isValid) {
 			out.print("<h1>Invalid Customer Id</h1>");
