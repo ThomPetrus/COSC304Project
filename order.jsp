@@ -175,8 +175,7 @@
 				System.err.println(e);
 			}
 		}
-
-		// Clear cart if order placed successfully
+		
 	%>
 </BODY>
 </HTML>
