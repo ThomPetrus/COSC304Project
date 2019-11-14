@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>YOUR NAME Grocery</title>
+<title>MIT Inc and Sons Ltd</title>
 </head>
 <body>
 
