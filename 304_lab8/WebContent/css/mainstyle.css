@@ -1,0 +1,27 @@
+body {
+	background-image: url("..//img/clewwwds.jpg");
+	background-repeat: no-repeat;
+	background-position: right top;
+	background-attachment: fixed;
+	background-size: 100%;
+}
+
+a:link, a:visited {
+	text-align: center;
+	text-decoration: none;
+	color: #674B4B;
+}
+
+a:hover, a:active {
+	color: lightSlateGray;
+}
+
+.div1 {
+	font-size: 22px;
+	margin-top: 100px;
+	margin-bottom: 70px;
+	margin-left: 70px;
+	margin-right: 70px;
+	text-align: center;
+	font-family:;
+}

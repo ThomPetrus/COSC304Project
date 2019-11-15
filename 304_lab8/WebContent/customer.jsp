@@ -2,9 +2,10 @@
 <html>
 <head>
 <title>Customer Page</title>
+<link href="css/mainstyle.css" rel="stylesheet">
 </head>
 <body>
-
+<%@ include file="header.jsp"%>
 <%@ include file="auth.jsp"%>
 <%@ page import="java.text.NumberFormat" %>
 <%@ include file="jdbc.jsp" %>
