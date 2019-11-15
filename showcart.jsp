@@ -103,8 +103,8 @@ a:hover, a:active {
 				NumberFormat currFormat = NumberFormat.getCurrencyInstance();
 
 				out.println("<h1>Your Shopping Cart</h1>");
-				out.print("<table><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
-				out.println("<th>Price</th><th>Subtotal</th><th>Change</th><th>Quantity</th></tr>");
+				out.print("<table align=\"center\" width=\"90%\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
+				out.println("<th>Price</th><th>Subtotal</th><th>Change Quantity</th></tr>");
 
 				double total = 0;
 				Iterator<Map.Entry<String, ArrayList<Object>>> iterator = productList.entrySet().iterator();
@@ -141,8 +141,8 @@ a:hover, a:active {
 
 					// Changing the quantity of items.
 					out.print("<td><a href=\"changecart.jsp?id=" + product.get(0) + "&name=" + product.get(1)
-							+ "&price=" + price + "&qty=" + "addOne" + "\">  +  </a></td>");
-					out.print("<td><a href=\"changecart.jsp?id=" + product.get(0) + "&name=" + product.get(1)
+							+ "&price=" + price + "&qty=" + "addOne" + "\">  +  </a>/");
+					out.print("<a href=\"changecart.jsp?id=" + product.get(0) + "&name=" + product.get(1)
 							+ "&price=" + price + "&qty=" + "removeOne" + "\">  -  </a></td>");
 					out.print("<td><a href=\"changecart.jsp?id=" + product.get(0) + "&name=" + product.get(1)
 							+ "&price=" + price + "&qty=" + "removeAll" + "\">Remove from Cart</a></td></tr>");
