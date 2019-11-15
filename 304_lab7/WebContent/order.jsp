@@ -175,7 +175,7 @@ a:hover, a:active {
 					int orderId = keys.getInt(1);
 
 					// Iterate through order print / add to OrderProduct  / retrieve total.	
-					out.print("<table align=\"center\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
+					out.print("<table align=\"center\" width=\"90%\"><tr><th>Product Id</th><th>Product Name</th><th>Quantity</th>");
 					out.println("<th>Price</th><th>Subtotal</th></tr>");
 
 					// Same code used in showcart to display order - used to add products to database
