@@ -20,16 +20,32 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 
+<!-- TODO style sheet as opposed to internal CSS -->
 <style>
 body {
 	background-image: url("clewwwds.jpg");
 	background-repeat: no-repeat;
+	background-position: right top;
+	background-attachment: fixed;
 	background-size: 100%;
+}
+
+a:link, a:visited {
+  text-align: center;
+  text-decoration: none;
+  color: #674B4B;
+}
+
+a:hover, a:active {
+  color:lightSlateGray;
 }
 
 .div1 {
 	font-size: 22px;
-	margin-top: 70px;
+	margin-top: 150px;
+	margin-bottom: 70px;
+	margin-left:70px;
+	margin-right:70px;
 	text-align: center;
 	font-family:;
 }
@@ -61,13 +77,16 @@ body {
 							class="dropdown-item" href="showcart.jsp">Show Cart</a>
 					</div></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
+			<form class="form-inline my-2 my-lg-0" method="get"
+				action="listprod.jsp">
 				<input class="form-control mr-sm-2" type="text" placeholder="Search"
-					aria-label="Search">
+					aria-label="Search" name="productName">
 				<button class="btn btn-secondary my-2 my-sm-0 white" type="submit">Search</button>
 			</form>
 		</div>
 	</nav>
+
+
 
 
 	<div class="div1">
