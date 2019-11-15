@@ -2,8 +2,10 @@
 <html>
 <head>
 <title>Administrator Page</title>
+<link href="css/mainstyle.css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="header.jsp"%>
 
 <%
 // TODO: Include files auth.jsp and jdbc.jsp
