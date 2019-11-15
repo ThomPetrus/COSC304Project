@@ -38,7 +38,7 @@ a:hover, a:active {
 
 .div1 {
 	font-size: 22px;
-	margin-top: 70px;
+	margin-top: 120px;
 	margin-bottom: 70px;
 	margin-left:70px;
 	margin-right:70px;
@@ -81,7 +81,7 @@ a:hover, a:active {
 		</div>
 	</nav>
 
-
+<div class="div1">
 
 	<h1>Enter your customer id to complete the transaction:</h1>
 
@@ -90,7 +90,7 @@ a:hover, a:active {
 			type="submit" value="Submit"><input type="reset"
 			value="Reset">
 	</form>
-
+</div>
 </body>
 </html>
 
