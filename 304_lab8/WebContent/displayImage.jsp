@@ -19,12 +19,12 @@ catch(Exception e)
 }
 
 // TODO: Modify SQL to retrieve productImage given productId
-String sql = "";
+String SQL = "SELECT productImage FROM product WHERE productid = " + id;
 
 try 
 {
 	getConnection();
-	PreparedStatement stmt = con.prepareStatement(sql);
+	PreparedStatement stmt = con.prepareStatement(SQL);
 	stmt.setInt(1,idVal);
 	ResultSet rst = stmt.executeQuery();		
 
