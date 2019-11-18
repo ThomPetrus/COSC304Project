@@ -20,7 +20,6 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 
-<!-- TODO style sheet as opposed to internal CSS -->
 <link href="css/mainstyle.css" rel="stylesheet">
 
 </head>
