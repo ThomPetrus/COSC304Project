@@ -29,7 +29,6 @@
 
 </head>
 <body>
-
 	<%@ include file="header.jsp"%>
 
 	<%
@@ -43,31 +42,35 @@
 		PreparedStatement pstmt = con.prepareStatement(SQL);
 		ResultSet rst = pstmt.executeQuery();
 		while (rst.next()) {
+			
 			int prodId = rst.getInt(1);
 			String pname = rst.getString(2);
 			double pr = rst.getDouble(3);
-			String imgUrl = rst.getString(4);
 			String prodDescr = rst.getString(6);
 
 			out.print("<div class=\"div1\">");
-			//If there is a productImageURL, display using IMG tag
-			out.print("<table align=\"center\" width=\"100%\" border=\"1\">");
-			out.print("<tr><td align=\"center\" colspan=\"4\">" + "<img src=" + imgUrl + ">" + "</td></tr>");
-			out.print("<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Product Description</th></tr>");
-			out.print("<tr><td>" + prodId + "</td><td>" + pname + "</td><td>" + currFormat.format(rst.getDouble(3))
-					+ "</td><td>"+ prodDescr +"</td></tr>");
-			
+			//If there is a productImageURL, display using IMG tag			
+			if (rst.getString(4) != null) {
+				String imgUrl = rst.getString(4);
+				out.print("<table align=\"center\" width=\"75%\" border=\"1\">");
+				out.print("<tr><td align=\"center\" colspan=\"4\">" + "<img src=" + imgUrl + ">" + "</td></tr>");
+				out.print("<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Product Description</th></tr>");
+				out.print("<tr><td>" + prodId + "</td><td>" + pname + "</td><td>" + currFormat.format(rst.getDouble(3)) + "</td><td>" + prodDescr + "</td></tr>");
+			// Else if there is an image stored ont the database display it using the bianry file.
+			} else if (rst.getBinaryStream(5) != null) {
+				out.print("<table align=\"center\" width=\"75%\" border=\"1\">");
+				out.print("<tr><td align=\"center\" colspan=\"4\">" + "<img src=\"displayImage.jsp?id=" + prodId + "\"></td></tr>");
+				out.print("<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Product Description</th></tr>");
+				out.print("<tr><td>" + prodId + "</td><td>" + pname + "</td><td>" + currFormat.format(rst.getDouble(3)) + "</td><td>" + prodDescr + "</td></tr>");
+			}
+
 			// Add links to Add to Cart and Continue Shopping
-			out.print("<tr><td colspan=\"2\" align=\"center\"><a href=\"addcart.jsp?id=" + rst.getInt(1) + "&name=" + rst.getString(2) + "&price="
-					+ rst.getDouble(3) + "\">Add Cart</a></td>");
-			out.print("<td colspan=\"2\" align=\"center\"><a href=\"listprod.jsp\">Continue Shopping</a></td></tr>");
+			out.print("<tr><td colspan=\"2\" align=\"center\"><a href=\"addcart.jsp?id=" + rst.getInt(1) + "&name="
+					+ rst.getString(2) + "&price=" + rst.getDouble(3) + "\">Add Cart</a></td>");
+			out.print(
+					"<td colspan=\"2\" align=\"center\"><a href=\"listprod.jsp\">Continue Shopping</a></td></tr>");
 			out.print("</table>");
 			out.print("</div>");
-			
-
-			// TODO: Retrieve any image stored directly in database. Note: Call displayImage.jsp with product id as parameter.
-			// Potentially later? I just figured the url thing was way easier than converting each image to a binary object and writing it to the db.		
-
 
 		}
 	%>

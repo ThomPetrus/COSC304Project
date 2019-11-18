@@ -118,13 +118,6 @@
 			} catch (SQLException ex) {
 				System.err.println(ex);
 			}
-			// Print out the ResultSet
-
-			// For each product create a link of the form
-			// addcart.jsp?id=productId&name=productName&price=productPrice
-			// Close connection
-
-			// Useful code for formatting currency values:
 		%>
 	</div>
 </body>
