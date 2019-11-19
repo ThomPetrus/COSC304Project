@@ -71,20 +71,22 @@
 					</h2>
 				</td>
 			</tr>
-		<%
-			//  Checks if User is logged in as an Admin
-			boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
+			<%
+				//  Checks if User is logged in as an Admin
+				boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
+				if (authenticated && ((String)session.getAttribute("authenticatedUser")).equalsIgnoreCase("admin")) {
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"addProduct.jsp\">Add a Product<h2>");
+					out.print("</td></td>");
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"uploadImage.jsp\">Upload Image<h2>");
+					out.print("</td></td></table>");
+					out.print("<h4>Logged in as Administrator</h4>");
+				} else if(authenticated){
+					out.print("</table>");
+					out.print("<h4>Logged in as "+session.getAttribute("authenticatedUser")+"</h4>");
+				}
+			%>
 
-			if (authenticated) {
-				out.print("<tr><td>");
-				out.print("<h2 align=\"center\"><a href=\"addProduct.jsp\">Add a Product<h2>");
-				out.print("</td></td>");
-				out.print("<tr><td>");
-				out.print("<h2 align=\"center\"><a href=\"uploadImage.jsp\">Upload Image<h2>");
-				out.print("</td></td></table>");
-				out.print("<h4>Logged in as Administrator</h4>");
-			}
-		%>
-
-	</div>
+			</div>
 </body>
