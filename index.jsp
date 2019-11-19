@@ -57,10 +57,11 @@
 		boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
 		
 		if (authenticated) {
-			out.print("<h4>Logged in as Administrator</h4>");
+			out.print("<h2>Logged in as Administrator</h2>");
 		}
 		%>
 		
 	</div>
 
 </body>
+</head>
