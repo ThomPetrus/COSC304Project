@@ -1,16 +1,7 @@
-<%@page import="javax.imageio.ImageIO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.*"%>
 <%@ page import="java.sql.*"%>
-<%@ page import="javax.servlet.ServletException"%>
-<%@ page import="javax.servlet.annotation.MultipartConfig"%>
-<%@ page import="javax.servlet.annotation.WebServlet"%>
-<%@ page import="javax.servlet.http.HttpServlet"%>
-<%@ page import="javax.servlet.http.HttpServletRequest"%>
-<%@ page import="javax.servlet.http.HttpServletResponse"%>
-<%@ page import="javax.servlet.http.Part"%>
-<%@ page import="javax.sql.rowset.serial.SerialBlob"%>
 
 <!DOCTYPE html>
 <html>
