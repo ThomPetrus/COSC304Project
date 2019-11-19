@@ -20,7 +20,6 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 
-<!-- TODO style sheet as opposed to internal CSS -->
 <link href="css/mainstyle.css" rel="stylesheet">
 
 </head>
@@ -53,7 +52,15 @@
 		<h2 align="center">
 			<a href="logout.jsp">Log out</a>
 		</h2>
+		<%
+		//  Checks if User is logged in as an Admin
+		boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
+		
+		if (authenticated) {
+			out.print("<h4>Logged in as Administrator</h4>");
+		}
+		%>
+		
 	</div>
 
 </body>
-</head>
