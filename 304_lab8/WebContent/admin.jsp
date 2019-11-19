@@ -68,6 +68,7 @@
 			} catch (SQLException ex) {
 				System.err.print(ex);
 			}
+			
 		%>
 	</div>
 </body>
