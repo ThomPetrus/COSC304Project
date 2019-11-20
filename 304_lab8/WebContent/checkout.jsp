@@ -65,7 +65,7 @@
 					} else {
 						out.write("<h3>Incorrect Customer Id and Password Combination.</h3>");
 					}
-
+					closeConnection();
 				} catch (Exception e) {
 					System.err.println(e.getMessage());
 				}
