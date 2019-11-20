@@ -71,7 +71,7 @@
 					"<td colspan=\"2\" align=\"center\"><a href=\"listprod.jsp\">Continue Shopping</a></td></tr>");
 			out.print("</table>");
 			out.print("</div>");
-
+			closeConnection();
 		}
 	%>
 
