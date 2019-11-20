@@ -47,6 +47,8 @@
 			if(rst.next()){
 				retStr = username;
 			}
+			
+			closeConnection();
 			} catch(SQLException e){
 				System.err.println(e.getMessage());
 			}
@@ -58,4 +60,6 @@
 			session.setAttribute("loginMessage", "Could not connect to the system using that username/password.");
 		}
 		return retStr;
+			
+		
 	}%>
