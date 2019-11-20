@@ -28,9 +28,14 @@
 	<%@ include file="header.jsp"%>
 	
 	<div class="div1">
-		<h1>Administrator Sales Report By Day</h1>
+		
 
 		<%
+		String userName = (String) session.getAttribute("authenticatedUser");
+		
+		if(userName != null && userName.equalsIgnoreCase("admin")){
+			
+			out.print("<h1>Administrator Sales Report By Day</h1>");
 			//Note: Forces loading of SQL Server driver
 			try { // Load driver class
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -68,7 +73,9 @@
 			} catch (SQLException ex) {
 				System.err.print(ex);
 			}
-			
+		} else {
+			out.print("<h1>Only Administrators have access to the admin page.</h1>");
+		}
 		%>
 	</div>
 </body>

@@ -1,7 +1,7 @@
 body {
 	background-image: url("../img/clewwwds.jpg");
 	background-repeat: no-repeat;
-	background-position: right top;
+	background-position: absolute;
 	background-attachment: fixed;
 	background-size: 100%;
 }
