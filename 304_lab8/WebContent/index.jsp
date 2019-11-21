@@ -28,39 +28,68 @@
 
 	<div class="div1">
 		<h1 align="center">Welcome to MIT Inc and Sons Ltd</h1>
+		<table border="1" align="center" bgcolor="white" width="90%">
+			<tr>
+				<td>
+					<h2 align="center">
+						<a href="login.jsp">Login</a>
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2 align="center">
+						<a href="listprod.jsp">Begin Shopping</a>
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2 align="center">
+						<a href="listorder.jsp">List All Orders</a>
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2 align="center">
+						<a href="customer.jsp">Customer Info</a>
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2 align="center">
+						<a href="admin.jsp">Administrators</a>
+					</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2 align="center">
+						<a href="logout.jsp">Log out</a>
+					</h2>
+				</td>
+			</tr>
+			<%
+				//  Checks if User is logged in as an Admin
+				boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
+				if (authenticated && ((String)session.getAttribute("authenticatedUser")).equalsIgnoreCase("admin")) {
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"addProduct.jsp\">Add a Product<h2>");
+					out.print("</td></tr>");
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"lostPassword.jsp\">Forgot Password?<h2>");
+					out.print("</td></tr>");
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"uploadImage.jsp\">Upload Image<h2>");
+					out.print("</td></td></table>");
+					out.print("<h4>Logged in as Administrator</h4>");
+				} else if(authenticated){
+					out.print("</table>");
+					out.print("<h4>Logged in as "+session.getAttribute("authenticatedUser")+"</h4>");
+				}
+			%>
 
-		<h2 align="center">
-			<a href="login.jsp">Login</a>
-		</h2>
-
-		<h2 align="center">
-			<a href="listprod.jsp">Begin Shopping</a>
-		</h2>
-
-		<h2 align="center">
-			<a href="listorder.jsp">List All Orders</a>
-		</h2>
-
-		<h2 align="center">
-			<a href="customer.jsp">Customer Info</a>
-		</h2>
-
-		<h2 align="center">
-			<a href="admin.jsp">Administrators</a>
-		</h2>
-
-		<h2 align="center">
-			<a href="logout.jsp">Log out</a>
-		</h2>
-		<%
-		//  Checks if User is logged in as an Admin
-		boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
-		
-		if (authenticated) {
-			out.print("<h4>Logged in as Administrator</h4>");
-		}
-		%>
-		
-	</div>
-
+			</div>
 </body>
