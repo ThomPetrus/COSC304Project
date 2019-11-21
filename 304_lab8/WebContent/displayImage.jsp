@@ -1,4 +1,6 @@
-<%@ page trimDirectiveWhitespaces="true" import="java.sql.*,java.io.*" %><%@ include file="jdbc.jsp" %><%
+<%@ page trimDirectiveWhitespaces="true" import="java.sql.*,java.io.*" %>
+<%@ include file="jdbc.jsp" %><%
+
 
 // Indicate that we are sending a JPG picture
 response.setContentType("image/jpeg");  
@@ -18,13 +20,12 @@ catch(Exception e)
 	return; 
 }
 
-// TODO: Modify SQL to retrieve productImage given productId
-String sql = "";
+String SQL = "SELECT productImage FROM product WHERE productid = ?";
 
 try 
 {
 	getConnection();
-	PreparedStatement stmt = con.prepareStatement(sql);
+	PreparedStatement stmt = con.prepareStatement(SQL);
 	stmt.setInt(1,idVal);
 	ResultSet rst = stmt.executeQuery();		
 

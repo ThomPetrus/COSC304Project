@@ -83,7 +83,7 @@
 					out.print("</td></tr>");
 					out.print("<tr><td>");
 					out.print("<h2 align=\"center\"><a href=\"uploadImage.jsp\">Upload Image<h2>");
-					out.print("</td></td></table>");
+					out.print("</td></tr></table>");
 					out.print("<h4>Logged in as Administrator</h4>");
 				} else if(authenticated){
 					out.print("</table>");

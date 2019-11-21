@@ -34,14 +34,12 @@
 			<p align="left">
 				<select size="1" name="categoryName">
 					<option>All</option>
-					<option>Beverages</option>
-					<option>Condiments</option>
-					<option>Confections</option>
-					<option>Dairy Products</option>
-					<option>Grains/Cereals</option>
-					<option>Meat/Poultry</option>
-					<option>Produce</option>
-					<option>Seafood</option>
+					<option>Gem Stones</option>
+					<option>Vidya Game Gems</option>
+					<option>Probably Legal</option>
+					<option>Hippie Gems</option>
+					<option>Pickles</option>
+					<option>Crypto Gems</option>
 				</select> <input type="text" name="productName" size="50"> <input
 					type="submit" value="Submit"><input type="reset"
 					value="Reset"> (Leave blank for all products)
@@ -113,20 +111,13 @@
 					out.print("<tr>");
 					out.print("<td><a href=\"addcart.jsp?id=" + rst.getInt(1) + "&name=" + rst.getString(2) + "&price="
 							+ rst.getDouble(3) + "\">Add Cart</a></td>");
-					out.print("<td>" + rst.getString(2) + "</td><td>" + currFormat.format(rst.getDouble(3)) + "</td>");
+					out.print("<td>" +"<a href=\"product.jsp?id="+rst.getInt(1)+"\">" + rst.getString(2) +"</a></td><td>" + currFormat.format(rst.getDouble(3)) + "</td>");
 					out.print("</tr>");
 				}
 
 			} catch (SQLException ex) {
 				System.err.println(ex);
 			}
-			// Print out the ResultSet
-
-			// For each product create a link of the form
-			// addcart.jsp?id=productId&name=productName&price=productPrice
-			// Close connection
-
-			// Useful code for formatting currency values:
 		%>
 	</div>
 </body>

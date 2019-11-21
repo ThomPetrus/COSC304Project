@@ -23,28 +23,56 @@
 
 </head>
 <body>
-<%@ include file="header.jsp"%>
+	<%@ include file="header.jsp"%>
+	<%@ include file="jdbc.jsp"%>
 
-<div class="div1">
-<h1>Enter your customer id and password to complete the transaction:</h1>
+	<div class="div1">
+		<h1>Enter your customer id and password to complete the
+			transaction:</h1>
 
-// TODO: ADD valid password check
-<form method="get" action="order.jsp">
-<table>
-<tr><td>Customer ID:</td><td><input type="text" name="customerId" size="20"></td></tr>
-<tr><td>Password:</td><td><input type="password" name="password" size="20"></td></tr>
-<tr><td><input type="submit" value="Submit"></td><td><input type="reset" value="Reset"></td></tr>
-</table>
-</form>
+		<form method="get" action="checkout.jsp">
+			<table align="center">
+				<tr>
+					<td>Customer ID:</td>
+					<td><input type="text" name="customerId" size="20"></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password" size="20"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Submit"></td>
+					<td><input type="reset" value="Reset"></td>
+				</tr>
+			</table>
+		</form>
 
-	<h1>Enter your customer id to complete the transaction:</h1>
 
-	<form method="get" action="order.jsp">
-		<input type="text" name="customerId" size="50"> <input
-			type="submit" value="Submit"><input type="reset"
-			value="Reset">
-	</form>
-</div>
+		<%
+			String customerId = request.getParameter("customerId");
+			String pw = request.getParameter("password");
+
+			if (customerId != null && customerId != "" && pw != null && pw != "") {
+
+				try {
+					getConnection();
+					String SQL = "SELECT password FROM customer WHERE customerId = " + customerId + " AND password = '"+pw+"';";
+					PreparedStatement pstmt = con.prepareStatement(SQL);
+					ResultSet rst = pstmt.executeQuery();
+
+					if (rst.next()) {
+						response.sendRedirect("order.jsp?customerId=" + customerId);
+					} else {
+						out.write("<h3>Incorrect Customer Id and Password Combination.</h3>");
+					}
+					closeConnection();
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
+			}
+		%>
+
+	</div>
 </body>
 </html>
 
