@@ -7,17 +7,17 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Mail Message</title>
 </head>
 <body>
+<%@ include file="jdbc.jsp"%>
 <%
 String result;
 final String to = request.getParameter("email");
 final String subject = "Administrator Password Recovery";
-final String messg = "Your password is:\n test";
+final String messg = "Password is: test";
 
 //  Uses a test email acount Ian set up
-//  It worked with my personal email bu that is super problematic
 final String from = "mittestemail2019@gmail.com";
 final String pass = "ianmichealtom2019";
 
@@ -56,12 +56,12 @@ try {
 	
 	Transport.send(message);
 	
-	result = "Message sent succesfully!";
+	result = "";
 	response.sendRedirect("index.jsp");
 } catch(MessagingException mex) {
 	mex.printStackTrace();
 	result = "Error: Message did not send";
-	response.sendRedirect("index.jsp");
+	response.sendRedirect("lostPassword.jsp");
 }
 %>
 </body>
