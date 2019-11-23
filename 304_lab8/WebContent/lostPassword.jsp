@@ -28,6 +28,12 @@
 <%@ include file="header.jsp"%>
 	<div class="div1">
 		<h1 align="center">Please Enter Your Email</h1>
+		<%
+				// Print prior error login message if present
+				if (request.getParameter("password") == "") {
+					out.println("<h2 align=\"center\">Please enter a valid email address</h2>");	
+				}
+			%>
 		
 		<br>
 		

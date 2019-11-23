@@ -28,14 +28,9 @@
 	<%@ include file="header.jsp"%>
 	
 	<div class="div1">
-		
+		<h1>Administrator Sales Report By Day</h1>
 
 		<%
-		String userName = (String) session.getAttribute("authenticatedUser");
-		
-		if(userName != null && userName.equalsIgnoreCase("admin")){
-			
-			out.print("<h1>Administrator Sales Report By Day</h1>");
 			//Note: Forces loading of SQL Server driver
 			try { // Load driver class
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -60,7 +55,7 @@
 				ResultSet rst = pstmt.executeQuery();
 
 				//Create the table
-				//Outside table.
+				//Order Table
 				out.print("<table width=\"100%\"align=\"center\" border=\"1\">");
 				out.print("<tr> <th>Order Date</th> <th>Total Amount</th> </tr>");
 
@@ -68,15 +63,46 @@
 					out.print("<tr><td>" + rst.getString(1) + "</td>" + "<td>" + rst.getBigDecimal(2));
 				}
 
-				//Close Inside table
+				//Close Order table
+				out.print("</table></td></tr>");
+				
+				out.print("<br>");
+				out.print("<h1>Customer Index</h1>");
+				
+				//  This SQL query returns a list of all customers in the customer database
+				String sql2 = "SELECT * FROM customer;";
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);
+				ResultSet rst2 = pstmt2.executeQuery();
+				
+				//Create the table
+				//Customer Table
+				out.print("<table width=\"100%\"align=\"center\" border=\"1\">");
+				out.print("<tr> <th>Customer ID</th>"
+						     + "<th>Name</th>"
+							 + "<th>Email</th>"
+							 + "<th>Phonenumber</th>"
+						     + "<th>Address</th></tr>");
+				
+				while(rst2.next()) {
+					out.print("<tr><td>" + rst2.getString(1) + "</td>"
+								+ "<td>" + rst2.getString(2) + " " + rst2.getString(3) + "</td>"
+								+ "<td>" + rst2.getString(4) + "</td>"
+								+ "<td>" + rst2.getString(5) + "</td>"
+								+ "<td>" + rst2.getString(6) + ", " + rst2.getString(7) + ", " + rst2.getString(8) + ", " +  rst2.getString(9) + ", " + rst2.getString(10) + ", " + "</td>");
+				}
+				
+				//Close Customer table
 				out.print("</table></td></tr>");
 			} catch (SQLException ex) {
 				System.err.print(ex);
-			}
-		} else {
-			out.print("<h1>Only Administrators have access to the admin page.</h1>");
-		}
+			}		
 		%>
+		<br>
+		<form name="MyForm" method=post action="loadData.jsp">
+			<table width="40%" border="0" cellspacing="0" cellpadding="0" align="center">
+				<input class="submit" type="submit" name="Sub" value="Database Restore">
+			</table>
+		</form>
 	</div>
 </body>
 </html>
