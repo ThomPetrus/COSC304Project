@@ -101,6 +101,7 @@
 		<form name="MyForm" method=post action="loadData.jsp">
 			<table width="40%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<input class="submit" type="submit" name="Sub" value="Database Restore">
+				<h3>Currently only works on LocalHost</h3>
 			</table>
 		</form>
 	</div>

@@ -69,6 +69,13 @@
 							"<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Product Description</th></tr>");
 					out.print("<tr><td>" + prodId + "</td><td>" + pname + "</td><td>"
 							+ currFormat.format(rst.getDouble(3)) + "</td><td>" + prodDescr + "</td></tr>");
+				} else {
+					out.print("<table align=\"center\" width=\"75%\" border=\"1\">");
+					out.print("<tr><td align=\"center\" colspan=\"4\"><p>Image currently unavailable - Will be available when I figure this servlet bs out.</p></td></tr>");
+					out.print(
+							"<tr><th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Product Description</th></tr>");
+					out.print("<tr><td>" + prodId + "</td><td>" + pname + "</td><td>"
+							+ currFormat.format(rst.getDouble(3)) + "</td><td>" + prodDescr + "</td></tr>");
 				}
 
 				// Add links to Add to Cart and Continue Shopping
