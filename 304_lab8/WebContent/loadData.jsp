@@ -19,6 +19,13 @@ System.out.println("Connecting to database.");
 
 Connection con = DriverManager.getConnection(url, uid, pw);
 		
+/*
+
+This will not function when uploaded to the server, for some reason I can not get it to find the file/ 
+Must be some way to fix it
+
+*/
+
 String fileName = "C:\\Users\\iheal\\eclipse-workspace\\gemSite\\data\\orderdb_sql.ddl";
 
 try
