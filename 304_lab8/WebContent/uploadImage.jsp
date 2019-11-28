@@ -42,7 +42,7 @@
 	<%@ include file="header.jsp"%>
 
 	<div class="div1">
-		<form method="post" action="<%application.getContextPath(); %>uploadServlet" 
+		<form method="post" action="uploadServlet" 
 			enctype="multipart/form-data">
 			<%
 			String idFromAddProduct = request.getParameter("id");
