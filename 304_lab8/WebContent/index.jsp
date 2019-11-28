@@ -76,16 +76,16 @@
 				boolean authenticated = session.getAttribute("authenticatedUser") == null ? false : true;
 				if (authenticated && ((String)session.getAttribute("authenticatedUser")).equalsIgnoreCase("admin")) {
 					out.print("<tr><td>");
-					out.print("<h2 align=\"center\"><a href=\"listcustomers.jsp\">Customer List<h2>");
-					out.print("</td></td>");
-					out.print("<tr><td>");
 					out.print("<h2 align=\"center\"><a href=\"addProduct.jsp\">Add a Product<h2>");
-					out.print("</td></td>");
+					out.print("</td></tr>");
 					out.print("<tr><td>");
-					out.print("<h2 align=\"center\"><a href=\"uploadImage.jsp\">Upload Image<h2>");
-					out.print("</td></td></table>");
+					out.print("<h2 align=\"center\"><a href=\"lostPassword.jsp\">Forgot Password?<h2>");
+					out.print("</td></tr>");
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"uploadImage.jsp\">Upload Image - Currently Only functional on LocalHost<h2>");
+					out.print("</td></tr></table>");
 					out.print("<h4>Logged in as Administrator</h4>");
-				} else if(authenticated){ // Add not equal to admin and add the my orders link.
+				} else if(authenticated){
 					out.print("<tr><td>");
 					out.print("<h2 align=\"center\"><a href=\"myorders.jsp\">My Orders<h2>");
 					out.print("</td></td>");
