@@ -3,10 +3,18 @@
 <%@ page import="java.io.*"%>
 <%@ page import="java.sql.*"%>
 
+<%@ page import="javax.servlet.ServletException"%>
+<%@ page import="javax.servlet.annotation.MultipartConfig"%>
+<%@ page import="javax.servlet.annotation.WebServlet"%>
+<%@ page import="javax.servlet.http.HttpServlet"%>
+<%@ page import="javax.servlet.http.HttpServletRequest"%>
+<%@ page import="javax.servlet.http.HttpServletResponse"%>
+<%@ page import="javax.servlet.http.Part"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MIT - ADMIN - Upload Image</title>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -34,8 +42,15 @@
 	<%@ include file="header.jsp"%>
 
 	<div class="div1">
-		<form action="uploadImage.jsp" method="get"
+		<form method="post" action="uploadServlet" 
 			enctype="multipart/form-data">
+			<%
+			String idFromAddProduct = request.getParameter("id");
+			if(idFromAddProduct!=null&&!idFromAddProduct.equals(""))
+			out.print("<div class=\"div1\"><h3>The product you just entered has the Auto-Generated key: "
+					+ idFromAddProduct + "</h3><div>");
+			%>
+			
 			<table border="1" align="center">
 				<tr>
 					<th align="center" bgcolor="lightGrey" colspan="4">
@@ -53,113 +68,10 @@
 				</tr>
 				<tr>
 					<td colspan="1"><input type="reset" value="Reset"></td>
-					<td colspan="1"><input type="submit" value="Submit"></td>
+					<td colspan="1"><input type="submit" value="Save"></td>
 				</tr>
 			</table>
 		</form>
-		<%
-			/*
-			
-				Reads in a File based upon the image chosen by the user. 
-				Verifies it is a file then reads / write the file bytes into a 
-				byte array. If the product Id is for a valid product the byte array is
-				then saved to the database.
-				
-				Since the parameters received from the forms were overwriting each other
-				and I wanted to keep the functionality of adding pictures for products already in
-				the database, and because I don't want to make it more complicated than it has to be
-				I've chosen to simply display the auto-generated key from a the product, if the user
-				was redirected to this page from the add product page, hence the funky variable names, just
-				for clarity I suppose.
-			
-			*/
-			String url = "jdbc:sqlserver://sql04.ok.ubc.ca:1433;DatabaseName=db_tvande;";
-			String uid = "tvande";
-			String pw = "33970138";
-
-			int id = 0;
-			int result = 0;
-			Connection con = null;
-
-			// image path && id
-			String imgUrl = request.getParameter("image");
-			String idFromAddProduct = request.getParameter("id");
-			String idFromForm = request.getParameter("idForm");
-
-			if (idFromAddProduct != null) {
-				out.print("<div class=\"div1\"><h3>The product you just entered has the Auto-Generated key: "
-						+ idFromAddProduct + "</h3><div>");
-			}
-
-			if (imgUrl != null && idFromForm != null) {
-
-				try {
-					id = Integer.parseInt(idFromForm);
-				} catch (Exception e) {
-					System.err.print("Could not convert product Id to integer.");
-				}
-
-				ByteArrayOutputStream bos = null;
-				File img = new File(imgUrl);
-
-				if (img.isFile()) {
-
-					try (FileInputStream in = new FileInputStream(img)) {
-
-						int BUFFER_SIZE = 10000;
-						byte[] buffer = new byte[BUFFER_SIZE];
-
-						bos = new ByteArrayOutputStream();
-
-						// Reads image / file Inputstream and writes it to ByteArrayOutputStream's buffer
-						for (int len; (len = in.read(buffer)) != -1;)
-							bos.write(buffer, 0, len);
-
-					} catch (FileNotFoundException e) {
-						System.err.print(e.getMessage());
-					} catch (IOException e2) {
-						System.err.print(e2.getMessage());
-					}
-				}
-
-				byte[] byteArray = null;
-
-				// All the bytes written to the buffer are all written to a new byteArray
-				if (bos != null) {
-					byteArray = bos.toByteArray();
-				}
-
-				try {
-					Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-					con = DriverManager.getConnection(url, uid, pw);
-
-					// First verify the productId entered is for a valid product in the database.
-					String SQL = "SELECT * FROM product WHERE productId =" + id;
-					PreparedStatement pstmt = con.prepareStatement(SQL);
-					ResultSet rst = pstmt.executeQuery();
-					if (rst.next()) {
-						// If a new byteArray containing the contents was created write it to the db.
-						if (byteArray != null) {
-							SQL = "UPDATE product SET productImage = ? WHERE productId = " + id + ";";
-							pstmt = con.prepareStatement(SQL);
-							pstmt.setBytes(1, byteArray);
-							result = pstmt.executeUpdate();
-
-							if (result > 0) {
-								out.print("<h1 align=\"center\">Image Succesfully Uploaded!</h1>");
-							}
-						}
-					} else {
-						out.print("<h1 align=\"center\">Invalid Product Id!</h1>");
-					}
-
-				} catch (Exception ex) {
-					System.err.print(ex);
-				} finally {
-					con.close();
-				}
-			}
-		%>
 	</div>
 </body>
 </html>
