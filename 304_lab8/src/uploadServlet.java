@@ -1,5 +1,8 @@
 import java.io.*;
 import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +23,12 @@ public class uploadServlet extends HttpServlet {
 	String uid = "tvande";
 	String pw = "33970138";
 
+	public void init(ServletConfig cfg) throws ServletException {
+		super.init(cfg); // First time Servlet is invoked}
+	}
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+
 		int id = 0;
 		int result = 0;
 		Connection con = null;
@@ -38,15 +45,15 @@ public class uploadServlet extends HttpServlet {
 			} catch (Exception e) {
 				System.err.print("Could not convert product Id to integer.");
 			}
-			// Retrieve the file part 
+			// Retrieve the file part
 			Part filePart = request.getPart("image");
 
 			if (filePart != null) {
 				// Get input stream for the file
 				in = filePart.getInputStream();
 
-				try {	
-	
+				try {
+
 					// Make connection
 					Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					con = DriverManager.getConnection(url, uid, pw);
@@ -55,13 +62,13 @@ public class uploadServlet extends HttpServlet {
 					String SQL = "SELECT * FROM product WHERE productId =" + id;
 					PreparedStatement pstmt = con.prepareStatement(SQL);
 					ResultSet rst = pstmt.executeQuery();
-					
+
 					// If the resultSet returns a row the product exists in the relation
 					if (rst.next()) {
 						SQL = "UPDATE product SET productImage = ? WHERE productId = ? ";
 						pstmt = con.prepareStatement(SQL);
-						
-						// The following sets the input stream as a blob 
+
+						// The following sets the input stream as a blob
 						if (in != null)
 							pstmt.setBlob(1, in);
 						pstmt.setInt(2, id);
@@ -72,15 +79,15 @@ public class uploadServlet extends HttpServlet {
 							message = "<h1 align=\"center\">Image Succesfully Uploaded!</h1>";
 						} else {
 							message = "<h1 align=\"center\">Image Upload Error.</h1>";
-						} 
-						
+						}
+
 					} else {
 						message = "<h1 align=\"center\">Invalid Product Id!</h1>";
 					}
 				} catch (SQLException ex) {
 					System.err.print(ex);
 					message = "Error: " + ex.getMessage();
-				}catch(Exception ex) {
+				} catch (Exception ex) {
 					message = "Error: " + ex.getMessage();
 				} finally {
 					if (con != null) {
