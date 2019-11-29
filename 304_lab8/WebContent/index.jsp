@@ -86,6 +86,9 @@
 					out.print("</td></tr></table>");
 					out.print("<h4>Logged in as Administrator</h4>");
 				} else if(authenticated){
+					out.print("<tr><td>");
+					out.print("<h2 align=\"center\"><a href=\"myorders.jsp\">My Orders<h2>");
+					out.print("</td></td>");
 					out.print("</table>");
 					out.print("<h4>Logged in as "+session.getAttribute("authenticatedUser")+"</h4>");
 				}
