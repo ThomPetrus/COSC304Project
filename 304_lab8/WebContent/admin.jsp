@@ -45,7 +45,7 @@ try{
 	String uid = "tvande";
 	String pw = "33970138";
 	Connection con = DriverManager.getConnection(url, uid, pw);
-	String sql = "SELECT CONVERT(DATE,orderDate) as date, SUM(totalAmount) as total FROM orderSummary GROUP BY orderDate;";
+	String sql = "SELECT CONVERT(DATE,orderDate) as date, SUM(totalAmount) as total FROM orderSummary GROUP BY CONVERT(DATE,orderDate);";
 	PreparedStatement pstmt;
 	pstmt = con.prepareStatement(sql);
 	ResultSet resultSet = pstmt.executeQuery();
@@ -113,7 +113,7 @@ chart.render();
 			//Make connection.
 			try (Connection con = DriverManager.getConnection(url, uid, pw);) {
 				// TODO: Write SQL query that prints out total order amount by day
-				String sql = "SELECT orderDate, SUM(totalAmount) " + "FROM orderSummary " + "GROUP BY orderDate;";
+				String sql = "SELECT CONVERT(DATE,orderDate) as date, SUM(totalAmount) as total FROM orderSummary GROUP BY CONVERT(DATE,orderDate);";
 				PreparedStatement pstmt;
 				pstmt = con.prepareStatement(sql);
 				ResultSet rst = pstmt.executeQuery();
