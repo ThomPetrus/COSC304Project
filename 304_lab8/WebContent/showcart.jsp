@@ -27,6 +27,7 @@
 <link href="css/mainstyle.css" rel="stylesheet">
 </head>
 <body>
+	<%@ include file="auth.jsp"%>
 	<%@ include file="header.jsp"%>
 	<div class="div1">
 		<%

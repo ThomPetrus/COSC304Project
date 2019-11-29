@@ -18,6 +18,14 @@ String pw = "33970138";
 System.out.println("Connecting to database.");
 
 Connection con = DriverManager.getConnection(url, uid, pw);
+
+
+//This is the filepath for Ian's localhost
+//String fileName = "C:\\Users\\iheal\\eclipse-workspace\\gemSite\\data\\orderdb_sql.ddl";
+
+//This is the filepath for the server. Don't test this out until after we present Micheals graph 
+String fileName = "https:\\cosc304.ok.ubc.ca\\33970138\\tomcat\\lab8\\WEB-INF\\classes\\uploadServlet";
+=======
 		
 /*
 
@@ -26,7 +34,8 @@ Must be some way to fix it
 
 */
 
-String fileName = "C:\\Users\\iheal\\eclipse-workspace\\gemSite\\data\\orderdb_sql.ddl";
+//String fileName = "C:\\Users\\iheal\\eclipse-workspace\\gemSite\\data\\orderdb_sql.ddl";
+
 
 try
 {

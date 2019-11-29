@@ -25,19 +25,21 @@
 <link href="css/mainstyle.css" rel="stylesheet">
 </head>
 <body>
+<%@ include file="auth.jsp"%>
 <%@ include file="header.jsp"%>
 	<div class="div1">
 		<h1 align="center">Please Enter Your Email</h1>
 		<%
 				// Print prior error login message if present
-				if (request.getParameter("password") == "") {
-					out.println("<h2 align=\"center\">Please enter a valid email address</h2>");	
-				}
-			%>
+				if(session.getAttribute("Header") == null){
+				} else {
+					out.println("<h2 align=\"center\">" + session.getAttribute("Header") + "</h2>");
+				}	
+		%>
 		
 		<br>
 		
-			<form name="emailFOrm" method=post action="mailmessage.jsp">
+			<form name="emailForm" method=post action="mailmessage.jsp">
 				<table width="40%" border="0" cellspacing="0" cellpadding="0" align="center">
 					<tr>
 						<td><input type="email" name="email" size=8></td>
