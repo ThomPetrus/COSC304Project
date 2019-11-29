@@ -67,7 +67,7 @@
 
 			// Make the connection
 			try (Connection con = DriverManager.getConnection(url, uid, pw)) {
-				String SQL = "SELECT productId, productName, productPrice FROM product";
+				String SQL = "SELECT productId, productName, productPrice, productImageURL, productImage FROM product";
 				boolean hasProduct = name != null && !name.equals("");
 				boolean catSelect = false;
 				if (catgName == null)
@@ -106,11 +106,17 @@
 					}
 				}
 
-				out.print("<table width=\"75%\" align=\"center\"><th></th><th>Product Name</th><th>Price</th>");
+				out.print("<table border=\"1\" width=\"75%\" align=\"center\"><th></th><th>Product Name</th><th>Price</th>");
 				while (rst.next()) {
 					out.print("<tr>");
 					out.print("<td><a href=\"addcart.jsp?id=" + rst.getInt(1) + "&name=" + rst.getString(2) + "&price="
 							+ rst.getDouble(3) + "\">Add Cart</a></td>");
+					if(rst.getString(4)!=null){
+						out.print("<td align=\"center\" colspan=\"4\">" + "<img src=" + rst.getString(4) + ">" + "</td>");
+					} else if(rst.getBinaryStream(5)!=null){
+						out.print("<td align=\"center\" colspan=\"4\">" + "<img src=\"displayImage.jsp?id=" + rst.getInt(1)
+								+ "\"></td>");
+					}
 					out.print("<td>" +"<a href=\"product.jsp?id="+rst.getInt(1)+"\">" + rst.getString(2) +"</a></td><td>" + currFormat.format(rst.getDouble(3)) + "</td>");
 					out.print("</tr>");
 				}
