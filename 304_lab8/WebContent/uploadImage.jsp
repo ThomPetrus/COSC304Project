@@ -42,15 +42,17 @@
 	<%@ include file="header.jsp"%>
 
 	<div class="div1">
-		<form method="post" action="uploadServlet" 
-			enctype="multipart/form-data">
+		<form method="post" action="uploadServlet" enctype="multipart/form-data"> 
+		<!--  <form method="post" action="uploadServlet" enctype="multipart/form-data"> <!-- Local Host-->
+
 			<%
-			String idFromAddProduct = request.getParameter("id");
-			if(idFromAddProduct!=null&&!idFromAddProduct.equals(""))
-			out.print("<div class=\"div1\"><h3>The product you just entered has the Auto-Generated key: "
-					+ idFromAddProduct + "</h3><div>");
+				out.print("<p>" + application.getContextPath() + "</p>");
+				String idFromAddProduct = request.getParameter("id");
+				if (idFromAddProduct != null && !idFromAddProduct.equals(""))
+					out.print("<div class=\"div1\"><h3>The product you just entered has the Auto-Generated key: "
+							+ idFromAddProduct + "</h3><div>");
 			%>
-			
+
 			<table border="1" align="center">
 				<tr>
 					<th align="center" bgcolor="lightGrey" colspan="4">
@@ -68,11 +70,10 @@
 				</tr>
 				<tr>
 					<td colspan="1"><input type="reset" value="Reset"></td>
-					<td colspan="1"><input type="submit" value="Save"></td>
+					<td colspan="1"><input type="submit" value="Submit"></td>
 				</tr>
 			</table>
 		</form>
 	</div>
 </body>
 </html>
-
