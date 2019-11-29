@@ -67,7 +67,7 @@
 		// Make sure to close connection
 	}
 	%>
-<div>
+</div>
 </body>
 </html>
 
